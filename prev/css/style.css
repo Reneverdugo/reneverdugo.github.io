@@ -1,0 +1,13 @@
+.space {
+	padding-top: 150px;
+}
+
+.space2 {
+	padding-top: 50px;
+}
+
+.circle {
+	border-radius: 50%;
+	width: 150px;
+	height: auto;
+}
