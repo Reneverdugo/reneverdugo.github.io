@@ -4,30 +4,18 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>My Portafolio</title>
+	<title>Rene Portfolio</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/skeleton.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/style-two.css">
 	<link rel="icon" href="images/favicon-1.png">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="js/jribbble.min.js"></script>
-	<script>
-			// ADD YOUR USERNAME HERE
-			var dribbbleUsername = 'ReneVerdugo';
-			// SET HOW MANY SHOTS ON SITE
-			var shotsOnPage = '50';
-	</script>
-	<script src="js/script.js"></script>
-</head>
+	<!-- <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> -->
 
-
-	<title>under-construction</title>
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/skeleton.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="icon" href="images/favicon-1.png">
+	<!--scripts for behance portfolio-->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
 </head>
 
 <body>
@@ -38,35 +26,42 @@
 		  <div class="eleven columns">
 		  	<h1>Hello World!</h1>
 		  </div>
-
 		</div>
+
 		<div class="row">
 			<div class="two columns">
 				<img src="images/git-profile.jpeg" alt="That's Me!" class="circle">
 			</div>
 		    <div class="ten columns">
-			  	<h3>My name is Rene <br>
+			  	<h3>My name is Rene Verdugo<br>
 			  	I'm a Graphic & Web Designer</h3>
 			  	<h5>based in Northwest of México 🇲🇽 🌮 🌯 .</h5>
 
-					<p>Follow me
-
-						<a href="https://www.behance.net/ReneV"><i class="fa fa-behance"></i></a>
-						<a href="https://dribbble.com/ReneVerdugo"><i class="fa fa-dribbble"></i></a>
-						<a href="https://twitter.com/ReneVerdugo"><i class="fa fa-twitter"></i></a>
-						<a href="https://www.instagram.com/reneverdsot/"><i class="fa fa-instagram"></i></a>
+				<p>Follow me
+					<a target="_blank" href="https://www.behance.net/ReneV"><i class="fa fa-behance"></i></a>
+					<a target="_blank" href="https://dribbble.com/ReneVerdugo"><i class="fa fa-dribbble"></i></a>
+					<a target="_blank" href="https://twitter.com/ReneVerdugo"><i class="fa fa-twitter"></i></a>
+					<a target="_blank" href="https://www.instagram.com/reneverdugos/"><i class="fa fa-instagram"></i></a>
 				</p>
 			</div>
-
-	</div>
-
-	<div class="row my-work">
-		<div class="container">
-			<h5 class="center">Check my work</h5>
-		</div>
-		<div class="main-container">
-			<ul class="shots-container"></ul>
 		</div>
 	</div>
+
+
+	<div id="content" class="content-area clearfix">
+		<script id="portfolio-template" type="text/x-handlebars-template">
+			<ul class="portfolio-list clearfix">
+				{{#each projects}}
+				<li class="portfolio-item"></li>
+				{{/each}}
+			</ul>
+		</script>
+	</div>
+	
+	<footer id="footer" class="portfolio-footer clearfix">
+	</footer>
+
+
+
 </body>
 </html>
