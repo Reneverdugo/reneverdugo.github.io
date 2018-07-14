@@ -11,3 +11,13 @@
 	width: 150px;
 	height: auto;
 }
+
+.four {
+	background-color: ghostwhite;
+	border-radius: 5px;
+}
+
+.my-items {
+	list-style: none;
+	text-decoration: none;
+}
