@@ -21,3 +21,42 @@
 	list-style: none;
 	text-decoration: none;
 }
+
+.card {
+	margin: 5px 10px 20px 10px;
+}
+
+.u-max-full-width {
+	border-radius: 5px;
+}
+
+.four {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.title {
+	font-weight: 600;
+	font-size: 1.8rem;
+}
+
+p span {
+	font-weight: 400;
+}
+
+a {
+	color: slategray;
+	text-decoration: none;
+}
+
+.card a {
+	font-size: 2rem;
+	background-color: #f2f2f2;
+	border-radius: 50px;
+	padding: 10px 20px;
+}
+
+i {
+	font-size: 2rem !important;
+	color: slategray;
+}
