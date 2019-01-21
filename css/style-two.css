@@ -60,19 +60,7 @@ footer {
     width: 100%;
 }
 footer p {
-    font-size: .8rem;
-}
-
-/* ANIMATIONS ***********************************************/
-.fadeIn {
-    -webkit-animation: animat_show 0.8s;
-    animation: animat_show 0.8s;
-    visibility: visible !important;
-}
-
-@-webkit-keyframes animat_show {
-    0%{opacity:0}
-    100%{opacity:1}
+    font-size: 1rem;
 }
 
 /* MEDIA QUERIES *******************************************/

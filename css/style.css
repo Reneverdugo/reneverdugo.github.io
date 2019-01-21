@@ -12,6 +12,10 @@
 	height: auto;
 }
 
+.fa:hover {
+	color: #1EAEDB;
+}
+
 .four {
 	background-color: ghostwhite;
 	border-radius: 5px;
@@ -59,4 +63,17 @@ a {
 i {
 	font-size: 2rem !important;
 	color: slategray;
+}
+
+.sobremi a {
+	font-size: 1.5rem;
+}
+
+.image{
+	padding-bottom: 4rem;
+}
+
+.hi {
+	font-size: 2rem;
+	font-weight: 600;
 }
