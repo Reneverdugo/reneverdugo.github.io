@@ -69,7 +69,8 @@ i {
 	font-size: 1.5rem;
 }
 
-.image{
+.image {
+    max-width: 90%;
 	padding-bottom: 4rem;
 }
 
