@@ -1,0 +1,79 @@
+---
+import { existsSync } from "fs";
+import { join } from "path";
+import Layout from "../layouts/Layout.astro";
+import { getProjects } from "../lib/notion";
+
+const projects = await getProjects();
+
+function thumbImg(slug: string): string | null {
+  const rel = `/images/projects/${slug}/thumbnail.png`;
+  return existsSync(join(process.cwd(), "public", rel)) ? rel : null;
+}
+---
+
+<Layout title="Portfolio" description="René Verdugo's portfolio — UX/UI design work across web, mobile, and product.">
+  <div class="max-w-[1200px] mx-auto px-6 xl:px-0 py-16 md:py-24">
+    <!-- Header -->
+    <div class="mb-16">
+      <p
+        class="text-[11px] font-bold tracking-[2px] uppercase mb-4"
+        style="color: var(--accent);"
+      >
+        Work
+      </p>
+      <h1 class="text-[48px] md:text-[60px] font-bold leading-[1.05] mb-6" style="color: var(--fg);">
+        Selected Projects
+      </h1>
+      <p class="text-[17px] leading-[1.65] max-w-[540px]" style="color: var(--fg-2);">
+        A collection of design work spanning web, mobile, and product — each one a different problem worth solving.
+      </p>
+    </div>
+
+    <!-- Projects grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        projects.map((project) => (
+          <a
+            href={`/portfolio/${project.slug}`}
+            class="group block rounded-xl border overflow-hidden transition-all duration-200 hover:-translate-y-1"
+            style="background-color: var(--bg-3); border-color: var(--bd);"
+          >
+            {thumbImg(project.slug) ? (
+              <img
+                src={thumbImg(project.slug)!}
+                alt={project.title}
+                class="h-[240px] md:h-[320px] w-full object-cover"
+              />
+            ) : (
+              <div
+                class="h-[240px] md:h-[320px] w-full"
+                style={`background-color: ${project.color};`}
+              />
+            )}
+            <div class="p-6 md:p-7">
+              <p
+                class="text-[11px] font-bold tracking-[1.5px] uppercase mb-2"
+                style="color: var(--accent);"
+              >
+                {project.type}
+              </p>
+              <h2 class="text-[20px] md:text-[22px] font-semibold mb-2" style="color: var(--fg);">
+                {project.title}
+              </h2>
+              <p class="text-[14px] leading-[1.55]" style="color: var(--fg-2);">
+                {project.description}
+              </p>
+              <p
+                class="mt-5 text-[20px] transition-transform duration-200 group-hover:translate-x-1"
+                style="color: var(--accent);"
+              >
+                →
+              </p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</Layout>

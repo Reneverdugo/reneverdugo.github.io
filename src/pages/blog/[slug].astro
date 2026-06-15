@@ -1,0 +1,234 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { posts } from "../../data/posts";
+
+export function getStaticPaths() {
+  return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
+}
+
+const { post } = Astro.props;
+---
+
+<Layout
+  title={post.title}
+  description={post.excerpt}
+>
+  <article>
+    <div class="max-w-[1200px] mx-auto px-6 xl:px-0 pt-10">
+
+      <!-- Back link -->
+      <a
+        href="/blog"
+        class="inline-block text-[14px] font-medium mb-8 transition-opacity hover:opacity-70"
+        style="color: var(--accent);"
+      >
+        ← Back to Blog
+      </a>
+
+      <!-- Category + read time -->
+      <div class="flex items-center gap-4 mb-5">
+        <span
+          class="inline-flex items-center rounded-xl px-3 py-1 text-[11px] font-semibold"
+          style="background-color: var(--accent-sub); color: var(--accent);"
+        >
+          {post.category}
+        </span>
+        <span class="text-[13px]" style="color: var(--fg-3);">{post.readTime}</span>
+      </div>
+
+      <!-- Title -->
+      <h1
+        class="text-[40px] md:text-[56px] font-bold leading-[1.15] mb-8 max-w-[900px]"
+        style="color: var(--fg);"
+      >
+        {post.title}
+      </h1>
+
+      <!-- Author + date -->
+      <div class="flex items-center gap-4 mb-10">
+        <span class="text-[14px] font-semibold" style="color: var(--fg);">René Verdugo</span>
+        <span class="w-px h-4 inline-block" style="background-color: var(--fg-3);"></span>
+        <span class="text-[14px]" style="color: var(--fg-3);">{post.date}</span>
+      </div>
+
+      <!-- Two-column layout: article + sidebar -->
+      <div class="flex flex-col lg:flex-row gap-16 pb-20">
+
+        <!-- Main content -->
+        <div class="flex-1 min-w-0">
+
+          <!-- Lead paragraph -->
+          <p
+            class="text-[19px] font-medium leading-[1.7] mb-8"
+            style="color: var(--fg);"
+          >
+            {post.leadParagraph}
+          </p>
+
+          <div class="border-b mb-8" style="border-color: var(--bd);"></div>
+
+          <!-- Body blocks -->
+          <div class="flex flex-col gap-6">
+            {
+              post.body.map((block) => {
+                if (block.type === "paragraph") {
+                  return (
+                    <p class="text-[16px] leading-[1.8]" style="color: var(--fg-2);">
+                      {block.content}
+                    </p>
+                  );
+                }
+                if (block.type === "heading") {
+                  return (
+                    <h2 class="text-[24px] font-bold mt-4" style="color: var(--fg);">
+                      {block.content}
+                    </h2>
+                  );
+                }
+                if (block.type === "quote") {
+                  return (
+                    <div class="flex gap-4 py-2">
+                      <div
+                        class="w-1 rounded-sm shrink-0"
+                        style="background-color: var(--accent);"
+                      />
+                      <p
+                        class="text-[20px] font-semibold italic leading-[1.55]"
+                        style="color: var(--fg);"
+                      >
+                        {block.content}
+                      </p>
+                    </div>
+                  );
+                }
+                if (block.type === "numbered-item") {
+                  return (
+                    <div class="flex gap-4 items-start">
+                      <span
+                        class="text-[28px] font-bold shrink-0 leading-none mt-0.5"
+                        style="color: var(--accent);"
+                      >
+                        {block.number}
+                      </span>
+                      <div>
+                        <p class="text-[17px] font-semibold mb-1" style="color: var(--fg);">
+                          {block.subheading}
+                        </p>
+                        <p class="text-[15px] leading-[1.7]" style="color: var(--fg-2);">
+                          {block.content}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                }
+                return null;
+              })
+            }
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="w-full lg:w-[280px] shrink-0">
+          <div
+            class="rounded-xl p-6 border sticky top-24"
+            style="background-color: var(--bg-3); border-color: var(--bd);"
+          >
+            {post.toc.length > 0 && (
+              <>
+                <p class="text-[14px] font-bold mb-4" style="color: var(--fg);">In this article</p>
+                <ul class="flex flex-col gap-3 mb-8">
+                  {post.toc.map((item) => (
+                    <li class="text-[13px]" style="color: var(--fg-2);">{item}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            <p
+              class="text-[11px] font-bold tracking-[1.5px] uppercase mb-3"
+              style="color: var(--fg-3);"
+            >
+              TAGS
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {
+                post.tags.map((tag) => (
+                  <span
+                    class="inline-flex items-center rounded-full px-3 h-8 text-[12px] border"
+                    style="background-color: var(--bg-3); border-color: var(--bd); color: var(--fg-2);"
+                  >
+                    {tag}
+                  </span>
+                ))
+              }
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Author bio -->
+    <div class="border-t" style="border-color: var(--bd);">
+      <div class="max-w-[1200px] mx-auto px-6 xl:px-0 py-12">
+        <div
+          class="rounded-2xl p-8 border flex items-start gap-6 max-w-[840px]"
+          style="background-color: var(--bg-3); border-color: var(--bd);"
+        >
+          <div class="w-16 h-16 rounded-full shrink-0 overflow-hidden" style="background-color: var(--bg-3);">
+            <img src="/images/me-simple-bg-color.png" alt="René Verdugo" class="w-full h-full object-cover" />
+          </div>
+          <div>
+            <p class="text-[16px] font-bold mb-1" style="color: var(--fg);">René Verdugo</p>
+            <p class="text-[13px] mb-3" style="color: var(--accent);">UX/UI Designer</p>
+            <p class="text-[14px] leading-[1.6]" style="color: var(--fg-2);">
+              I design digital products at the intersection of clarity and delight. Writing about
+              process, craft, and everything in between.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related posts -->
+    {post.related.length > 0 && (
+      <div class="border-t" style="border-color: var(--bd);">
+        <div class="max-w-[1200px] mx-auto px-6 xl:px-0 py-12">
+          <p
+            class="text-[11px] font-bold tracking-[2px] uppercase mb-8"
+            style="color: var(--accent);"
+          >
+            MORE FROM THE BLOG
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {
+              post.related.map((rel) => (
+                <a
+                  href={`/blog/${rel.slug}`}
+                  class="group block rounded-xl border p-6 transition-all duration-200 hover:-translate-y-0.5"
+                  style="background-color: var(--bg-3); border-color: var(--bd);"
+                >
+                  <p
+                    class="text-[11px] font-bold tracking-[1.5px] uppercase mb-3"
+                    style="color: var(--accent);"
+                  >
+                    {rel.category}
+                  </p>
+                  <h3
+                    class="text-[15px] font-semibold leading-[1.4] mb-4 transition-opacity group-hover:opacity-75"
+                    style="color: var(--fg);"
+                  >
+                    {rel.title}
+                  </h3>
+                  <p class="text-[12px]" style="color: var(--fg-3);">
+                    {rel.date}
+                  </p>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    )}
+  </article>
+</Layout>

@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* ── Theme variables ── */
+:root {
+  --bg: #08142c;
+  --bg-2: #101f3e;
+  --bg-3: #152548;
+  --bd: #1e3460;
+  --fg: #ffffff;
+  --fg-2: #7a9fc2;
+  --fg-3: #3d5a80;
+  --accent: #2c89ea;
+  --accent-sub: #1a4a7a;
+}
+
+[data-theme="light"] {
+  --bg: #f5f8ff;
+  --bg-2: #eaf1ff;
+  --bg-3: #ffffff;
+  --bd: #d0e3f5;
+  --fg: #08142c;
+  --fg-2: #4a6fa0;
+  --fg-3: #8ba3c7;
+  --accent-sub: #c6e0fb;
+}
+
+/* ── Tailwind token mapping ── */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--bg-2);
+  --color-elevated: var(--bg-3);
+  --color-bd: var(--bd);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-fg-3: var(--fg-3);
+  --color-accent: var(--accent);
+  --color-accent-sub: var(--accent-sub);
+  --font-body: "DM Sans", sans-serif;
+}
+
+/* ── Base ── */
+html {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: "DM Sans", sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}

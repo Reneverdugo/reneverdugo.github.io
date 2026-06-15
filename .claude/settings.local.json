@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\rene8\\\\Documents\\\\My Portfolio\\\\Website\\\\src\\\\pages\\\\blog\")",
+      "Bash(Out-Null)",
+      "Bash(Write-Host \"ok\")",
+      "Bash(npm run *)",
+      "Bash(npm install *)",
+      "mcp__claude_ai_Notion__notion-search",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-update-data-source",
+      "Bash(node -e \"const { Client } = require\\('@notionhq/client'\\); const c = new Client\\({ auth: 'test' }\\); console.log\\(typeof c.databases?.query\\);\")",
+      "Bash(node -e \"const { Client } = require\\('@notionhq/client'\\); const c = new Client\\({ auth: 'test' }\\); console.log\\(Object.keys\\(c\\)\\);\")",
+      "Bash(node -e \"const { Client } = require\\('@notionhq/client'\\); const c = new Client\\({ auth: 'test' }\\); console.log\\(Object.keys\\(c.databases\\)\\);\")",
+      "Bash(node -e \"const pkg = require\\('@notionhq/client/package.json'\\); console.log\\(pkg.version, pkg.description\\);\")",
+      "Bash(node -e \"const { Client } = require\\('@notionhq/client'\\); const c = new Client\\({ auth: 'test' }\\); console.log\\('dataSources:', Object.keys\\(c.dataSources\\)\\); console.log\\('search:', typeof c.search\\);\")",
+      "Bash(node -e ' *)",
+      "Bash(npx tsc *)",
+      "Bash(npx astro *)",
+      "mcp__claude_ai_Notion__notion-update-page",
+      "Skill(run)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4321/)",
+      "Bash(npx playwright *)"
+    ]
+  }
+}
