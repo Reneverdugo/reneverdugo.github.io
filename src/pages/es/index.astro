@@ -1,0 +1,206 @@
+---
+import { existsSync } from "fs";
+import { join } from "path";
+import Layout from "../../layouts/Layout.astro";
+import { getProjects } from "../../lib/notion";
+import { posts } from "../../data/posts";
+import { ui } from "../../i18n/ui";
+
+const t = ui.es;
+const projects = await getProjects();
+
+function thumbImg(slug: string): string | null {
+  const rel = `/images/projects/${slug}/thumbnail.png`;
+  return existsSync(join(process.cwd(), "public", rel)) ? rel : null;
+}
+---
+
+<Layout
+  title="Inicio"
+  description="René Verdugo — Diseñador UX/UI creando productos digitales que combinan claridad y deleite."
+  lang="es"
+>
+  <!-- ── Hero ── -->
+  <section class="min-h-[calc(100vh-72px)] flex items-center py-20">
+    <div class="max-w-[1200px] mx-auto px-6 xl:px-0 w-full">
+      <div class="flex flex-col lg:flex-row items-start lg:items-center gap-16">
+        <!-- Left -->
+        <div class="flex-1 max-w-[600px]">
+          <p class="text-[11px] font-bold tracking-[2px] uppercase mb-4" style="color: var(--accent);">
+            {t.home.eyebrow}
+          </p>
+          <h1 class="text-[56px] md:text-[72px] xl:text-[80px] font-bold leading-[1.05] mb-4" style="color: var(--fg);">
+            {t.home.h1}
+          </h1>
+          <p class="text-[24px] md:text-[28px] xl:text-[32px] font-light mb-6" style="color: var(--accent);">
+            {t.home.role}
+          </p>
+          <p class="text-[16px] md:text-[17px] leading-[1.65] mb-10" style="color: var(--fg-2); max-width: 540px;">
+            {t.home.bio}
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center gap-4 mb-14">
+            <a
+              href="/es/portfolio"
+              class="px-7 h-[52px] flex items-center justify-center rounded-lg text-[15px] font-semibold text-white transition-opacity hover:opacity-85"
+              style="background-color: var(--accent);"
+            >
+              {t.home.ctaPrimary}
+            </a>
+            <a
+              href="/es/blog"
+              class="px-7 h-[52px] flex items-center justify-center rounded-lg text-[15px] border transition-colors hover:border-accent"
+              style="background-color: var(--bg-2); border-color: var(--bd); color: var(--fg-2);"
+            >
+              {t.home.ctaSecondary}
+            </a>
+          </div>
+
+          <!-- Stats -->
+          <div class="flex items-center gap-12 md:gap-16">
+            <div>
+              <p class="text-[26px] font-bold" style="color: var(--fg);">20+</p>
+              <p class="text-[13px]" style="color: var(--fg-3);">{t.home.statProjects}</p>
+            </div>
+            <div class="w-px h-8" style="background-color: var(--bd);"></div>
+            <div>
+              <p class="text-[26px] font-bold" style="color: var(--fg);">8+</p>
+              <p class="text-[13px]" style="color: var(--fg-3);">{t.home.statYears}</p>
+            </div>
+            <div class="w-px h-8" style="background-color: var(--bd);"></div>
+            <div>
+              <p class="text-[26px] font-bold" style="color: var(--fg);">12</p>
+              <p class="text-[13px]" style="color: var(--fg-3);">{t.home.statClients}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile photo -->
+        <div class="hidden lg:block flex-shrink-0">
+          <div class="w-[271px] h-[342px] rounded-[20px] overflow-hidden" style="background-color: var(--bg-3);">
+            <img src="/images/me-simple-bg-color.png" alt="René Verdugo" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="height: 1px; background-color: var(--bd);"></div>
+
+  <!-- ── Selected Work ── -->
+  <section class="py-20 md:py-24">
+    <div class="max-w-[1200px] mx-auto px-6 xl:px-0">
+      <div class="flex items-end justify-between mb-12">
+        <div>
+          <p class="text-[11px] font-bold tracking-[2px] uppercase mb-3" style="color: var(--accent);">
+            {t.home.workEyebrow}
+          </p>
+          <h2 class="text-[36px] md:text-[44px] font-bold" style="color: var(--fg);">
+            {t.home.workTitle}
+          </h2>
+        </div>
+        <a href="/es/portfolio" class="text-[14px] transition-opacity hover:opacity-70 hidden sm:block" style="color: var(--accent);">
+          {t.home.workViewAll}
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {
+          projects.map((project) => (
+            <a
+              href={`/es/portfolio/${project.slug}`}
+              class="group block rounded-xl border overflow-hidden transition-all duration-200 hover:-translate-y-1"
+              style="background-color: var(--bg-3); border-color: var(--bd);"
+            >
+              {thumbImg(project.slug) ? (
+                <img src={thumbImg(project.slug)!} alt={project.title} class="h-[240px] md:h-[300px] w-full object-cover" />
+              ) : (
+                <div class="h-[240px] md:h-[300px] w-full" style={`background-color: ${project.color};`} />
+              )}
+              <div class="p-6 md:p-7">
+                <p class="text-[11px] font-bold tracking-[1.5px] uppercase mb-2" style="color: var(--accent);">{project.type}</p>
+                <h3 class="text-[20px] md:text-[22px] font-semibold mb-2" style="color: var(--fg);">{project.title}</h3>
+                <p class="text-[14px] leading-[1.55]" style="color: var(--fg-2);">{project.description}</p>
+                <p class="mt-5 text-[20px] transition-transform duration-200 group-hover:translate-x-1" style="color: var(--accent);">→</p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      <a href="/es/portfolio" class="mt-8 inline-block text-[14px] sm:hidden" style="color: var(--accent);">
+        {t.home.workViewAll}
+      </a>
+    </div>
+  </section>
+
+  <div style="height: 1px; background-color: var(--bd);"></div>
+
+  <!-- ── Latest Writing ── -->
+  <section class="py-20 md:py-24">
+    <div class="max-w-[1200px] mx-auto px-6 xl:px-0">
+      <div class="flex items-end justify-between mb-8">
+        <div>
+          <p class="text-[11px] font-bold tracking-[2px] uppercase mb-3" style="color: var(--accent);">
+            {t.home.blogEyebrow}
+          </p>
+          <h2 class="text-[36px] md:text-[44px] font-bold" style="color: var(--fg);">
+            {t.home.blogTitle}
+          </h2>
+        </div>
+        <a href="/es/blog" class="text-[14px] transition-opacity hover:opacity-70 hidden sm:block" style="color: var(--accent);">
+          {t.home.blogViewAll}
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3" style="border-top: 1px solid var(--bd);">
+        {
+          posts.map((post, i) => (
+            <article
+              class="py-8 md:py-10 px-0 md:px-8"
+              style={[
+                i % 3 !== 2 ? "border-right: 1px solid var(--bd);" : "",
+                i >= 3 ? "border-top: 1px solid var(--bd);" : "",
+                i % 3 === 0 ? "padding-left: 0;" : "",
+                i % 3 === 2 ? "padding-right: 0;" : "",
+              ].filter(Boolean).join(" ")}
+            >
+              {i > 0 && <div class="md:hidden mb-8" style="height: 1px; background-color: var(--bd);" />}
+              <p class="text-[11px] font-bold tracking-[1.5px] uppercase mb-3" style="color: var(--accent);">{post.category}</p>
+              <h3 class="text-[18px] md:text-[19px] font-semibold leading-[1.4] mb-3" style="color: var(--fg);">{post.title}</h3>
+              <p class="text-[13px] mb-4" style="color: var(--fg-3);">{post.date}</p>
+              <p class="text-[14px] leading-[1.55] mb-6" style="color: var(--fg-2);">{post.excerpt}</p>
+              <a href={`/es/blog/${post.slug}`} class="text-[14px] font-semibold transition-opacity hover:opacity-70" style="color: var(--accent);">
+                {t.home.blogReadMore}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+
+      <a href="/es/blog" class="mt-4 inline-block text-[14px] sm:hidden" style="color: var(--accent);">
+        {t.home.blogViewAll}
+      </a>
+    </div>
+  </section>
+
+  <!-- ── CTA Band ── -->
+  <section style="background-color: var(--bg-2);">
+    <div class="max-w-[1200px] mx-auto px-6 xl:px-0 py-16 md:py-20">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div>
+          <h2 class="text-[32px] md:text-[38px] font-bold mb-2" style="color: var(--fg);">{t.home.ctaBandTitle}</h2>
+          <p class="text-[16px] md:text-[17px]" style="color: var(--fg-2);">{t.home.ctaBandSub}</p>
+        </div>
+        <a
+          href="/es/contact"
+          class="flex-shrink-0 px-7 h-[48px] flex items-center justify-center rounded-lg text-[15px] font-semibold text-white transition-opacity hover:opacity-85"
+          style="background-color: var(--accent);"
+        >
+          {t.home.ctaBandBtn}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

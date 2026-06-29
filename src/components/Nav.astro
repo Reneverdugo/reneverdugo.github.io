@@ -1,13 +1,29 @@
 ---
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/blog", label: "Blog" },
-  { href: "/cv", label: "CV" },
-  { href: "/contact", label: "Contact" },
-];
+import { ui } from "../i18n/ui";
 
 const path = Astro.url.pathname;
+const lang = path.startsWith("/es") ? "es" : "en";
+const base = lang === "es" ? "/es" : "";
+const t = ui[lang].nav;
+
+const links = [
+  { href: `${base}/`, label: t.home },
+  { href: `${base}/portfolio`, label: t.portfolio },
+  { href: `${base}/blog`, label: t.blog },
+  { href: `${base}/cv`, label: t.cv },
+  { href: `${base}/contact`, label: t.contact },
+];
+
+// Language switcher URLs
+const pathWithoutBase = lang === "es" ? path.replace(/^\/es/, "") || "/" : path;
+const enUrl = pathWithoutBase;
+const esUrl = pathWithoutBase === "/" ? "/es" : `/es${pathWithoutBase}`;
+
+function isActive(href: string): boolean {
+  const home = `${base}/`;
+  if (href === home || href === base) return path === href || path === base || path === base + "/";
+  return path === href || path.startsWith(href + "/");
+}
 ---
 
 <header
@@ -15,7 +31,7 @@ const path = Astro.url.pathname;
   style="background-color: var(--bg-3); border-color: var(--bd);"
 >
   <div class="max-w-[1200px] mx-auto px-6 xl:px-0 h-[72px] flex items-center justify-between">
-    <a href="/" class="text-[28px] font-bold" style="color: var(--fg);">R.</a>
+    <a href={`${base}/`} class="text-[28px] font-bold" style="color: var(--fg);">R.</a>
 
     <!-- Desktop nav -->
     <nav class="hidden md:flex items-center gap-8">
@@ -24,16 +40,29 @@ const path = Astro.url.pathname;
           <a
             href={href}
             class="text-[14px] font-medium transition-colors hover:text-accent"
-            style={
-              path === href || (href !== "/" && path.startsWith(href))
-                ? "color: var(--accent);"
-                : "color: var(--fg-2);"
-            }
+            style={isActive(href) ? "color: var(--accent);" : "color: var(--fg-2);"}
           >
             {label}
           </a>
         ))
       }
+
+      <!-- Language switcher -->
+      <div class="flex items-center gap-1 text-[13px] font-semibold">
+        <a
+          href={enUrl}
+          onclick="localStorage.setItem('preferred-lang','en')"
+          class="px-2 py-0.5 rounded transition-colors"
+          style={lang === "en" ? "color: var(--accent);" : "color: var(--fg-3);"}
+        >EN</a>
+        <span style="color: var(--bd);">|</span>
+        <a
+          href={esUrl}
+          onclick="localStorage.setItem('preferred-lang','es')"
+          class="px-2 py-0.5 rounded transition-colors"
+          style={lang === "es" ? "color: var(--accent);" : "color: var(--fg-3);"}
+        >ES</a>
+      </div>
 
       <button
         id="theme-toggle"
@@ -56,6 +85,21 @@ const path = Astro.url.pathname;
 
     <!-- Mobile: theme toggle + hamburger -->
     <div class="flex md:hidden items-center gap-3">
+      <!-- Language switcher mobile -->
+      <div class="flex items-center gap-1 text-[12px] font-semibold">
+        <a
+          href={enUrl}
+          onclick="localStorage.setItem('preferred-lang','en')"
+          style={lang === "en" ? "color: var(--accent);" : "color: var(--fg-3);"}
+        >EN</a>
+        <span style="color: var(--bd);">|</span>
+        <a
+          href={esUrl}
+          onclick="localStorage.setItem('preferred-lang','es')"
+          style={lang === "es" ? "color: var(--accent);" : "color: var(--fg-3);"}
+        >ES</a>
+      </div>
+
       <button
         id="theme-toggle-mobile"
         class="w-8 h-8 flex items-center justify-center rounded-full"
@@ -98,11 +142,7 @@ const path = Astro.url.pathname;
           <a
             href={href}
             class="text-[15px] font-medium py-1"
-            style={
-              path === href || (href !== "/" && path.startsWith(href))
-                ? "color: var(--accent);"
-                : "color: var(--fg-2);"
-            }
+            style={isActive(href) ? "color: var(--accent);" : "color: var(--fg-2);"}
           >
             {label}
           </a>

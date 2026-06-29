@@ -1,0 +1,59 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { posts } from "../../../data/posts";
+import { ui } from "../../../i18n/ui";
+
+const t = ui.es.blog;
+---
+
+<Layout
+  title="Blog"
+  description="Escritura de René Verdugo sobre diseño, investigación UX y carrera en product design."
+  lang="es"
+>
+  <div class="max-w-[1200px] mx-auto px-6 xl:px-0 py-16 md:py-24">
+    <div class="mb-16">
+      <p class="text-[11px] font-bold tracking-[2px] uppercase mb-4" style="color: var(--accent);">
+        {t.eyebrow}
+      </p>
+      <h1 class="text-[48px] md:text-[60px] font-bold leading-[1.05] mb-6" style="color: var(--fg);">
+        {t.h1}
+      </h1>
+      <p class="text-[17px] leading-[1.65] max-w-[540px]" style="color: var(--fg-2);">
+        {t.desc}
+      </p>
+    </div>
+
+    <div class="flex flex-col">
+      {
+        posts.map((post) => (
+          <>
+            <div style="height: 1px; background-color: var(--bd);" />
+            <a
+              href={`/es/blog/${post.slug}`}
+              class="group flex flex-col md:flex-row md:items-start justify-between gap-6 py-10 transition-all"
+            >
+              <div class="flex-1 max-w-[640px]">
+                <p class="text-[11px] font-bold tracking-[1.5px] uppercase mb-3" style="color: var(--accent);">{post.category}</p>
+                <h2
+                  class="text-[20px] md:text-[22px] font-semibold leading-[1.35] mb-3 transition-colors group-hover:text-accent"
+                  style="color: var(--fg);"
+                >
+                  {post.title}
+                </h2>
+                <p class="text-[14px] leading-[1.6]" style="color: var(--fg-2);">{post.excerpt}</p>
+              </div>
+              <div class="flex md:flex-col md:items-end gap-4 md:gap-2 md:pt-1 flex-shrink-0">
+                <p class="text-[13px]" style="color: var(--fg-3);">{post.date}</p>
+                <p class="text-[14px] font-semibold transition-transform duration-200 group-hover:translate-x-1" style="color: var(--accent);">
+                  {t.read}
+                </p>
+              </div>
+            </a>
+          </>
+        ))
+      }
+      <div style="height: 1px; background-color: var(--bd);" />
+    </div>
+  </div>
+</Layout>

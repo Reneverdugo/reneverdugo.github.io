@@ -1,0 +1,201 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { ui } from "../../i18n/ui";
+
+const t = ui.es.cv;
+
+const experience = [
+  {
+    title: "Lead UX/UI Designer",
+    company: "Freelance & Clients",
+    period: "2022 — Presente",
+    bullets: [
+      "Lideré el diseño end-to-end en 8+ proyectos en sectores de fintech, viajes y SaaS.",
+      "Crecí la cartera de clientes a 12 clientes recurrentes a través de referidos y trabajo de portafolio.",
+      "Establecí estándares de sistemas de diseño adoptados por 3 equipos de ingeniería.",
+    ],
+  },
+  {
+    title: "Web Developer / UX/UI Designer",
+    company: "BitsKingdom",
+    period: "2020 — 2025",
+    bullets: [
+      "Lideré proyectos de diseño web end-to-end para múltiples clientes, incluyendo sitios de marketing, landing pages y aplicaciones web.",
+      "Creé wireframes, flujos de usuario y diseños UI en alta fidelidad alineados con objetivos de negocio y necesidades de usuario.",
+      "Traduje requerimientos abstractos y ambiguos en soluciones UX estructuradas y UI pulida.",
+      "Construí y mantuve sistemas de diseño, componentes UI y patrones reutilizables en Figma.",
+      "Colaboré con desarrolladores para garantizar viabilidad técnica, implementación eficiente y precisión del diseño.",
+      "Entregué soluciones de diseño responsivo optimizadas para múltiples dispositivos y tamaños de pantalla.",
+      "Presenté conceptos de diseño, justificación e iteraciones a clientes y stakeholders.",
+      "Gestioné múltiples proyectos simultáneamente en un entorno remoto de ritmo acelerado.",
+    ],
+  },
+  {
+    title: "UX/UI Designer",
+    company: "Crol",
+    period: "2019 — 2020",
+    bullets: [
+      "Diseñé interfaces web responsivas con foco en usabilidad, claridad y rendimiento.",
+      "Mejoré la experiencia de usuario en plataformas de los sectores de viajes y automotriz.",
+      "Creé wireframes y diseños UI basados en necesidades de usuario y requerimientos de negocio.",
+      "Colaboré con equipos multidisciplinarios para iterar sobre funcionalidades y flujos del producto.",
+    ],
+  },
+  {
+    title: "UI Designer",
+    company: "Emcor Software",
+    period: "2016 — 2019",
+    bullets: [
+      "Diseñé interfaces de usuario para aplicaciones web y móviles.",
+      "Desarrollé sistemas visuales, componentes UI y sets de íconos para productos digitales.",
+      "Contribuí al diseño del producto desde el concepto hasta la entrega.",
+      "Colaboré con equipos internos para mejorar la usabilidad y la consistencia del diseño.",
+    ],
+  },
+];
+
+const skills = {
+  Diseño: ["UX Research", "Interaction Design", "Visual Design", "Prototyping", "Design Systems"],
+  Herramientas: ["Figma", "FigJam", "Notion", "Photoshop", "Ilustrator", "Spline", "Webflow", "Git"],
+  "Colab. Dev": ["HTML/CSS", "JavaScript", "WordPress", "Handoff specs", "Spec Driven Development"],
+};
+
+const certifications = [
+  { name: "User Experience: The Beginner's Guide - IxDF", year: "2024" },
+  { name: "Mastering Digital Product Design - Udemy", year: "2020" },
+];
+---
+
+<Layout
+  title="CV"
+  description="René Verdugo — Diseñador UX/UI con 8+ años creando productos digitales para startups y scale-ups."
+  lang="es"
+>
+  <!-- Header band -->
+  <div class="py-14" style="background-color: var(--bg-2);">
+    <div class="max-w-[1200px] mx-auto px-6 xl:px-0">
+      <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10">
+        <div class="max-w-[600px]">
+          <h1 class="text-[52px] md:text-[60px] font-bold leading-none mb-4" style="color: var(--fg);">René Verdugo</h1>
+          <p class="text-[26px] font-light mb-6" style="color: var(--accent);">Diseñador UX/UI</p>
+          <p class="text-[16px] leading-[1.7]" style="color: var(--fg-2);">
+            Diseñador UX/UI con 9+ años de experiencia en diseño web, producto digital e interfaces responsivas. Historial probado liderando proyectos end-to-end, desde investigación y wireframes hasta UI en alta fidelidad y handoff a desarrollo. Experto en transformar requerimientos complejos en soluciones de diseño claras y escalables. Sólida especialización en sistemas de diseño, componentes UI y colaboración cross-funcional con desarrolladores y stakeholders.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-5">
+          <div class="flex flex-col gap-2">
+            <a href="mailto:hola@reneverdugo.xyz" class="text-[13px] transition-opacity hover:opacity-70" style="color: var(--fg-2);">✉  hola@reneverdugo.xyz</a>
+            <span class="text-[13px]" style="color: var(--fg-2);">🌐  reneverdugo.xyz</span>
+            <span class="text-[13px]" style="color: var(--fg-2);">📍  Remoto · MX</span>
+          </div>
+          <div class="flex gap-3">
+            <a
+              href="#"
+              class="inline-flex items-center justify-center rounded-lg text-[14px] font-semibold px-6 h-12 transition-opacity hover:opacity-85"
+              style="background-color: var(--accent); color: #fff;"
+            >
+              {t.downloadPdf}
+            </a>
+            <button
+              class="inline-flex items-center justify-center rounded-lg text-[14px] border px-5 h-12 transition-opacity hover:opacity-75"
+              style="border-color: var(--bd); background-color: var(--bg-3); color: var(--fg-2);"
+              onclick="navigator.clipboard.writeText(window.location.href)"
+            >
+              {t.shareLink}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="border-t" style="border-color: var(--bd);">
+    <div class="max-w-[1200px] mx-auto px-6 xl:px-0 py-12">
+      <div class="flex flex-col lg:flex-row gap-16">
+
+        <!-- Experience column -->
+        <div class="flex-1 min-w-0">
+          <p class="text-[11px] font-bold tracking-[2px] uppercase mb-8" style="color: var(--accent);">{t.experience}</p>
+          <div class="flex flex-col gap-12">
+            {
+              experience.map((job) => (
+                <div class="flex gap-5">
+                  <div class="w-[3px] shrink-0 rounded-full mt-1" style="background-color: var(--accent); height: 100px;" />
+                  <div>
+                    <h3 class="text-[20px] font-bold mb-1" style="color: var(--fg);">{job.title}</h3>
+                    <p class="text-[15px] mb-1" style="color: var(--accent);">{job.company}</p>
+                    <p class="text-[13px] mb-4" style="color: var(--fg-3);">{job.period}</p>
+                    <ul class="flex flex-col gap-2">
+                      {job.bullets.map((b) => (
+                        <li class="text-[14px] leading-[1.75]" style="color: var(--fg-2);">· {b}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="w-full lg:w-[380px] shrink-0">
+          <p class="text-[11px] font-bold tracking-[2px] uppercase mb-6" style="color: var(--accent);">{t.skills}</p>
+          <div class="flex flex-col gap-6 mb-10">
+            {
+              Object.entries(skills).map(([category, tags]) => (
+                <div>
+                  <p class="text-[14px] font-bold mb-3" style="color: var(--fg);">{category}</p>
+                  <div class="flex flex-wrap gap-2">
+                    {tags.map((tag) => (
+                      <span class="inline-flex items-center rounded-full px-3 h-[30px] text-[12px] border" style="background-color: var(--bg-3); border-color: var(--bd); color: var(--fg-2);">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+
+          <div class="border-t mb-8" style="border-color: var(--bd);"></div>
+
+          <p class="text-[11px] font-bold tracking-[2px] uppercase mb-5" style="color: var(--accent);">{t.education}</p>
+          <p class="text-[16px] font-bold mb-1" style="color: var(--fg);">Licenciatura en Diseño Gráfico</p>
+          <p class="text-[14px] mb-1" style="color: var(--fg-2);">ITSON, Ciudad Obregón, Sonora, México</p>
+          <p class="text-[13px] mb-8" style="color: var(--fg-3);">2008 — 2012</p>
+
+          <div class="border-t mb-8" style="border-color: var(--bd);"></div>
+
+          <p class="text-[11px] font-bold tracking-[2px] uppercase mb-5" style="color: var(--accent);">{t.certifications}</p>
+          <div class="flex flex-col gap-3">
+            {
+              certifications.map((cert) => (
+                <div class="flex justify-between items-baseline">
+                  <p class="text-[13px]" style="color: var(--fg-2);">{cert.name}</p>
+                  <p class="text-[12px] shrink-0 ml-4" style="color: var(--fg-3);">{cert.year}</p>
+                </div>
+              ))
+            }
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA band -->
+  <div class="py-20" style="background-color: var(--bg-2);">
+    <div class="max-w-[1200px] mx-auto px-6 xl:px-0 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+      <div>
+        <h2 class="text-[36px] font-bold mb-3" style="color: var(--fg);">{t.ctaTitle}</h2>
+        <p class="text-[16px]" style="color: var(--fg-2);">{t.ctaSub}</p>
+      </div>
+      <a
+        href="/es/contact"
+        class="inline-flex items-center justify-center rounded-lg text-[15px] font-semibold px-8 h-12 shrink-0 transition-opacity hover:opacity-85"
+        style="background-color: var(--accent); color: #fff;"
+      >
+        {t.ctaBtn}
+      </a>
+    </div>
+  </div>
+</Layout>

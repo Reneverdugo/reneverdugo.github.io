@@ -1,0 +1,135 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { ui } from "../../i18n/ui";
+
+const t = ui.es.contact;
+
+const socials = [
+  { name: "Twitter / X", handle: "@reneverdugo", href: "https://twitter.com/reneverdugo" },
+  { name: "LinkedIn", handle: "in/rene-verdugo-design", href: "https://linkedin.com/in/rene-verdugo-desing/" },
+  { name: "GitHub", handle: "@reneverdugo", href: "https://github.com/reneverdugo" },
+  { name: "Dribbble", handle: "reneverdugo", href: "https://dribbble.com/reneverdugo" },
+];
+---
+
+<Layout
+  title="Contacto"
+  description="Contacta a René Verdugo — disponible para proyectos freelance y colaboraciones."
+  lang="es"
+>
+  <div class="max-w-[1200px] mx-auto px-6 xl:px-0 py-16 md:py-20">
+    <div class="flex flex-col lg:flex-row gap-16 xl:gap-24 items-start">
+
+      <!-- Left column -->
+      <div class="flex-1">
+        <div class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8" style="background-color: var(--bg-3);">
+          <span class="w-[7px] h-[7px] rounded-full bg-green-500 shrink-0"></span>
+          <span class="text-[12px] font-medium" style="color: var(--fg-2);">{t.badge}</span>
+        </div>
+
+        <h1 class="text-[64px] md:text-[80px] font-bold leading-[1.0] mb-6" style="color: var(--fg);">{t.h1}</h1>
+
+        <p class="text-[18px] leading-[1.6] mb-8 max-w-[480px]" style="color: var(--fg-2);">{t.subtitle}</p>
+
+        <a
+          href="mailto:dwrenevs@gmail.com"
+          class="inline-block text-[20px] font-semibold mb-12 transition-opacity hover:opacity-70"
+          style="color: var(--accent);"
+        >
+          hola@renverdugo.xyz
+        </a>
+
+        <div class="mb-8">
+          <p class="text-[11px] font-bold tracking-[2px] uppercase mb-3" style="color: var(--accent);">{t.availabilityLabel}</p>
+          <p class="text-[15px] leading-[1.65] max-w-[380px]" style="color: var(--fg-2);">{t.availabilityText}</p>
+        </div>
+
+        <div class="mb-6" style="width: 36px; height: 2px; background-color: var(--accent);"></div>
+
+        <p class="text-[11px] font-bold tracking-[2px] uppercase mb-4" style="color: var(--accent);">{t.findMe}</p>
+        <div class="flex flex-col gap-2">
+          {
+            socials.map((s) => (
+              <a
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-between rounded-lg px-4 h-11 transition-opacity hover:opacity-80"
+                style="background-color: var(--bg-3); width: 460px; max-width: 100%;"
+              >
+                <span class="text-[14px] font-medium" style="color: var(--fg);">{s.name}</span>
+                <span class="text-[13px]" style="color: var(--accent);">{s.handle}</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Right column: form card -->
+      <div class="w-full lg:w-[580px] xl:w-[620px] shrink-0 rounded-2xl p-8 md:p-10" style="background-color: var(--bg-3);">
+        <h2 class="text-[20px] font-semibold mb-6" style="color: var(--fg);">{t.formTitle}</h2>
+
+        <div data-fs-success class="hidden mb-5 px-4 py-3 rounded-lg text-[14px] font-medium" style="background-color: var(--accent-sub); color: var(--accent);">
+          {t.success}
+        </div>
+        <div data-fs-error class="hidden mb-5 px-4 py-3 rounded-lg text-[14px]" style="background-color: #2c1a1a; color: #f87171;"></div>
+
+        <form id="contact-form" class="flex flex-col gap-5">
+          <input type="text" name="_gotcha" style="display:none;" tabindex="-1" autocomplete="off" />
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div class="flex flex-col gap-[7px]">
+              <label for="name" class="text-[12px] font-semibold" style="color: var(--fg-2);">{t.name}</label>
+              <input id="name" name="name" type="text" required placeholder={t.namePlaceholder} data-fs-field
+                class="field-input h-11 px-4 rounded-lg border text-[14px] outline-none"
+                style="background-color: var(--bg-2); border-color: var(--bd); color: var(--fg);" />
+              <span data-fs-error="name" class="fs-field-error text-[12px] hidden" style="color: #f87171;"></span>
+            </div>
+            <div class="flex flex-col gap-[7px]">
+              <label for="email" class="text-[12px] font-semibold" style="color: var(--fg-2);">{t.email}</label>
+              <input id="email" name="email" type="email" required placeholder="tu@email.com" data-fs-field
+                class="field-input h-11 px-4 rounded-lg border text-[14px] outline-none"
+                style="background-color: var(--bg-2); border-color: var(--bd); color: var(--fg);" />
+              <span data-fs-error="email" class="fs-field-error text-[12px] hidden" style="color: #f87171;"></span>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-[7px]">
+            <label for="subject" class="text-[12px] font-semibold" style="color: var(--fg-2);">{t.subject}</label>
+            <input id="subject" name="subject" type="text" placeholder={t.subjectPlaceholder}
+              class="field-input h-11 px-4 rounded-lg border text-[14px] outline-none"
+              style="background-color: var(--bg-2); border-color: var(--bd); color: var(--fg);" />
+          </div>
+
+          <div class="flex flex-col gap-[7px]">
+            <label for="message" class="text-[12px] font-semibold" style="color: var(--fg-2);">{t.message}</label>
+            <textarea id="message" name="message" required rows="5" placeholder={t.messagePlaceholder} data-fs-field
+              class="field-input px-4 py-3 rounded-lg border text-[14px] outline-none resize-none leading-[1.6]"
+              style="background-color: var(--bg-2); border-color: var(--bd); color: var(--fg);"></textarea>
+            <span data-fs-error="message" class="fs-field-error text-[12px] hidden" style="color: #f87171;"></span>
+          </div>
+
+          <div class="flex justify-end">
+            <button
+              type="submit"
+              data-fs-submit-btn
+              class="h-11 px-7 rounded-lg text-[14px] font-semibold text-white transition-opacity hover:opacity-85 disabled:opacity-50 disabled:cursor-not-allowed"
+              style="background-color: var(--accent);"
+            >
+              {t.send}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .field-input:focus { border-color: var(--accent); }
+  [data-fs-error]:empty { display: none !important; }
+</style>
+
+<script>
+  import { initForm } from "@formspree/ajax";
+  initForm({ formElement: "#contact-form", formId: "xvznbkaq" });
+</script>

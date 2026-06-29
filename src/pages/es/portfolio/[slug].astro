@@ -1,0 +1,206 @@
+---
+import { existsSync } from "fs";
+import { join } from "path";
+import Layout from "../../../layouts/Layout.astro";
+import { getProjectsWithContent } from "../../../lib/notion";
+import { ui } from "../../../i18n/ui";
+import { projectTranslationsES } from "../../../data/projectTranslationsES";
+
+const t = ui.es.portfolioSlug;
+
+export async function getStaticPaths() {
+  const projects = await getProjectsWithContent();
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+const { project: _project } = Astro.props;
+// Merge Notion data with Spanish translations (ES fields override EN fields)
+const tr = projectTranslationsES[_project.slug];
+const project = tr ? { ..._project, ...tr } : _project;
+
+function projectImg(filename: string): string | null {
+  const rel = `/images/projects/${project.slug}/${filename}`;
+  return existsSync(join(process.cwd(), "public", rel)) ? rel : null;
+}
+
+const heroImg = projectImg("hero.png") ?? projectImg("hero.jpg");
+
+const designImgs = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  .map((n) => projectImg(`design-0${n}.png`) ?? projectImg(`design-0${n}.jpg`))
+  .filter((img): img is string => img !== null);
+---
+
+<Layout title={project.title} description={project.subtitle} lang="es">
+  <article>
+    <div class="max-w-[1200px] mx-auto px-6 xl:px-0 pt-10 pb-0">
+      <a href="/es/portfolio" class="inline-block text-[14px] font-medium mb-10 transition-opacity hover:opacity-70" style="color: var(--accent);">
+        {t.back}
+      </a>
+
+      <p class="text-[11px] font-bold tracking-[2px] uppercase mb-4" style="color: var(--accent);">{project.type}</p>
+
+      <h1 class="text-[52px] md:text-[68px] font-bold leading-[1.05] mb-6" style="color: var(--fg);">{project.title}</h1>
+
+      <p class="text-[18px] leading-[1.65] max-w-[740px] mb-10" style="color: var(--fg-2);">{project.subtitle}</p>
+
+      <!-- Meta row -->
+      <div class="flex flex-wrap items-end gap-x-16 gap-y-4 mb-12">
+        {
+          [
+            { label: "AÑO", value: project.year },
+            { label: "ROL", value: project.role },
+            { label: "DURACIÓN", value: project.duration },
+            { label: "HERRAMIENTAS", value: project.tools },
+          ].map(({ label, value }) => (
+            <div>
+              <p class="text-[11px] font-bold tracking-[1.5px] uppercase mb-1" style="color: var(--fg-3);">{label}</p>
+              <p class="text-[14px] font-medium" style="color: var(--fg);">{value}</p>
+            </div>
+          ))
+        }
+        {project.link && (
+          <a
+            href={project.link.startsWith("http") ? project.link : `https://${project.link}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-lg px-5 h-9 text-[13px] font-semibold border transition-opacity hover:opacity-75"
+            style="color: var(--accent); border-color: var(--accent);"
+          >
+            {t.visitSite}
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        )}
+      </div>
+
+      <!-- Hero image -->
+      {heroImg ? (
+        <div class="w-full rounded-2xl overflow-hidden flex items-center justify-center" style={`background-color: ${project.color}; height: 640px;`}>
+          <img src={heroImg} alt={project.title} class="w-full h-full object-contain" />
+        </div>
+      ) : (
+        <div class="w-full rounded-2xl flex items-center justify-center" style={`background-color: ${project.color}; height: 640px;`}>
+          <span class="text-[13px]" style="color: var(--fg-3);">Hero / Preview</span>
+        </div>
+      )}
+    </div>
+
+    <!-- Overview -->
+    <div class="border-t mt-16" style="border-color: var(--bd);">
+      <div class="max-w-[1200px] mx-auto px-6 xl:px-0 pt-12 pb-0">
+        <p class="text-[11px] font-bold tracking-[2px] uppercase mb-6" style="color: var(--accent);">{t.overview}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div>
+            <h2 class="text-[26px] font-bold mb-5" style="color: var(--fg);">{t.challenge}</h2>
+            <p class="text-[15px] leading-[1.75] whitespace-pre-line" style="color: var(--fg-2);">{project.challenge}</p>
+          </div>
+          <div>
+            <h2 class="text-[26px] font-bold mb-5" style="color: var(--fg);">{t.approach}</h2>
+            <p class="text-[15px] leading-[1.75]" style="color: var(--fg-2);">{project.approach}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Metrics band -->
+    <div class="mt-16 py-14" style="background-color: var(--bg-2);">
+      <div class="max-w-[1200px] mx-auto px-6 xl:px-0">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {project.metrics.map((m) => (
+            <div>
+              <p class="text-[38px] font-bold leading-none mb-2" style="color: var(--accent);">{m.value}</p>
+              <p class="text-[13px]" style="color: var(--fg-2);">{m.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Process -->
+    {project.steps.length > 0 && (
+      <div class="border-t" style="border-color: var(--bd);">
+        <div class="max-w-[1200px] mx-auto px-6 xl:px-0 pt-12 pb-16">
+          <p class="text-[11px] font-bold tracking-[2px] uppercase mb-4" style="color: var(--accent);">{t.process}</p>
+          <h2 class="text-[44px] font-bold mb-12" style="color: var(--fg);">{t.processTitle}</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {project.steps.map((step) => (
+              <div class="rounded-xl p-8 border" style="background-color: var(--bg-2); border-color: var(--bd);">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="inline-flex items-center justify-center rounded-lg text-[13px] font-bold w-[52px] h-[28px] shrink-0" style="background-color: var(--bg-3); color: var(--accent);">{step.num}</span>
+                  <h3 class="text-[20px] font-bold" style="color: var(--fg);">{step.title}</h3>
+                </div>
+                <p class="text-[15px] leading-[1.75]" style="color: var(--fg-2);">{step.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Design gallery -->
+    {designImgs.length > 0 && (
+      <div class="border-t" style="border-color: var(--bd);">
+        <div class="max-w-[1200px] mx-auto px-6 xl:px-0 pt-12 pb-16">
+          <p class="text-[11px] font-bold tracking-[2px] uppercase mb-4" style="color: var(--accent);">{t.design}</p>
+          <h2 class="text-[44px] font-bold mb-12" style="color: var(--fg);">{t.designTitle}</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {designImgs.map((img, i) => (
+              <img src={img} alt={`${project.title} — diseño ${i + 1}`} class="w-full rounded-xl" />
+            ))}
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Demo -->
+    {project.demo && (
+      <div class="border-t" style="border-color: var(--bd);">
+        <div class="max-w-[1200px] mx-auto px-6 xl:px-0 pt-12 pb-16">
+          <p class="text-[11px] font-bold tracking-[2px] uppercase mb-4" style="color: var(--accent);">{t.demo}</p>
+          <h2 class="text-[44px] font-bold mb-10" style="color: var(--fg);">{t.demoTitle}</h2>
+          <div class="rounded-2xl overflow-hidden" style="position: relative; padding-top: 56.25%;">
+            <iframe
+              src={project.demo.replace("loom.com/share/", "loom.com/embed/")}
+              frameborder="0"
+              allowfullscreen
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+            />
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Next project -->
+    {project.nextProject && (
+      <div class="border-t" style="border-color: var(--bd);">
+        <div class="max-w-[1200px] mx-auto px-6 xl:px-0 py-14">
+          <p class="text-[11px] font-bold tracking-[2px] uppercase mb-3" style="color: var(--fg-3);">{t.nextProject}</p>
+          <a href={`/es/portfolio/${project.nextProject.slug}`} class="group inline-block">
+            <h3 class="text-[32px] font-bold mb-2 transition-opacity group-hover:opacity-75" style="color: var(--fg);">
+              {project.nextProject.title} →
+            </h3>
+            <p class="text-[14px]" style="color: var(--accent);">{project.nextProject.type}</p>
+          </a>
+        </div>
+      </div>
+    )}
+
+    <!-- CTA band -->
+    <div class="py-20" style="background-color: var(--bg-2);">
+      <div class="max-w-[1200px] mx-auto px-6 xl:px-0 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        <div>
+          <h2 class="text-[38px] font-bold mb-3" style="color: var(--fg);">{t.ctaTitle}</h2>
+          <p class="text-[17px]" style="color: var(--fg-2);">{t.ctaSub}</p>
+        </div>
+        <a
+          href="/es/contact"
+          class="inline-flex items-center justify-center rounded-lg text-[15px] font-semibold px-8 h-12 shrink-0 transition-opacity hover:opacity-85"
+          style="background-color: var(--accent); color: #fff;"
+        >
+          {t.ctaBtn}
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>
