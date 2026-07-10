@@ -10,7 +10,6 @@ export const ui = {
     footer: {
       tagline: "Designing with purpose, one pixel at a time.",
       rights: "All rights reserved.",
-      madeBy: "Designed & built by me.",
     },
     home: {
       eyebrow: "Welcome",
@@ -109,7 +108,6 @@ export const ui = {
     footer: {
       tagline: "Diseñando con propósito, un píxel a la vez.",
       rights: "Todos los derechos reservados.",
-      madeBy: "Diseñado y construido por mí.",
     },
     home: {
       eyebrow: "Bienvenido",
