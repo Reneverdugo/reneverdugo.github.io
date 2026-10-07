@@ -1,4 +1,4 @@
-import type { ProjectStep } from "./projects";
+import type { Project, ProjectStep } from "./projects";
 
 interface ProjectTranslationES {
   description: string;
@@ -7,6 +7,12 @@ interface ProjectTranslationES {
   approach: string;
   metrics: { value: string; label: string }[];
   steps: ProjectStep[];
+  /** Optional header fields; omitted keys keep the English value. */
+  type?: string;
+  title?: string;
+  role?: string;
+  tools?: string;
+  note?: string;
 }
 
 export const projectTranslationsES: Record<string, ProjectTranslationES> = {
@@ -88,19 +94,21 @@ export const projectTranslationsES: Record<string, ProjectTranslationES> = {
   },
 
   "ileana-schinder-website-redesign": {
+    type: "DISEÑO WEB · TEMA WORDPRESS A MEDIDA",
+    title: "Ileana Schinder: rediseño y tema WordPress a medida",
+    role: "Diseñador web y desarrollador WordPress, en Bits Kingdom",
+    tools: "Figma, WordPress (tema a medida), HTML, CSS, JavaScript, PHP",
+    note: "Este sitio fue reconstruido con otra tecnología después de mi salida de Bits Kingdom en 2025. Las pantallas de abajo muestran el tema WordPress a medida que diseñé y construí en 2023.",
     description:
-      "Diseño y desarrollo del sitio web de Ileana Schinder, arquitecta residencial con sede en Washington DC.",
+      "Rediseño para una arquitecta de Washington DC. Diseñado en Figma y construido como tema WordPress a medida, escrito a mano y sin constructor visual.",
     subtitle:
       "Rediseño web completo para una arquitecta de Washington DC — de Figma a WordPress",
     challenge:
       "Ileana Schinder, arquitecta residencial con sede en Washington DC, tenía un sitio web desactualizado que no comunicaba la calidad ni la sofisticación de su trabajo. El sitio no reflejaba su marca, dificultaba que los clientes potenciales evaluaran su portafolio y no generaba los leads que su reputación merecía.\n\nEl proyecto requería un rediseño completo — desde la identidad visual y la experiencia de usuario hasta la implementación en código personalizado en WordPress — para crear un sitio que estuviera a la altura de la precisión y elegancia de su arquitectura.",
     approach:
-      "Llevé el proyecto de extremo a extremo como diseñador y desarrollador. Comenzando con una fase de descubrimiento para entender a sus clientes, el panorama competitivo y los valores de marca, diseñé una UI limpia con protagonismo de la fotografía en Figma — priorizando el espacio en blanco, una tipografía refinada y una paleta de colores mínima que dejara que las imágenes de sus proyectos hablaran por sí solas.\n\nLuego construí el sitio en WordPress usando HTML, CSS y JavaScript personalizados en Visual Studio Code, asegurando una traducción pixel-perfect del diseño al código. El resultado es un sitio rápido y responsivo que eleva su portafolio y posiciona su estudio para clientes residenciales de alto nivel.",
+      "Fui diseñador y desarrollador del proyecto, como parte del equipo de Bits Kingdom. Después de una fase de descubrimiento sobre sus clientes, su competencia y su marca, diseñé en Figma una interfaz centrada en la fotografía. Luego la construí como tema WordPress a medida desde cero, sin constructor visual.",
     metrics: [
-      { value: "5 meses", label: "duración del proyecto" },
-      { value: "1", label: "diseñador y desarrollador, de extremo a extremo" },
-      { value: "WordPress", label: "plataforma CMS" },
-      { value: "Figma + VS Code", label: "herramientas de diseño y desarrollo" },
+      { value: "12", label: "plantillas del tema" },
     ],
     steps: [
       {
@@ -118,7 +126,7 @@ export const projectTranslationsES: Record<string, ProjectTranslationES> = {
       {
         num: "03",
         title: "Desarrollo",
-        body: "Construí un tema WordPress personalizado desde cero usando HTML, CSS y JavaScript en Visual Studio Code. Prioricé el rendimiento, la responsividad en todos los dispositivos y una estructura de código limpia para facilitar futuras actualizaciones de contenido.",
+        body: "Construí un tema WordPress a medida desde cero, sin constructor visual. Plantillas en PHP, estilos e interacciones en CSS y JavaScript escritos a mano. Los proyectos del portafolio son un tipo de contenido propio con sus campos, así agregar un proyecto es llenar un formulario. Responsivo desde la primera plantilla y estructurado para actualizar contenido sin depender de un desarrollador.",
         imageLabel: "",
       },
       {
@@ -131,19 +139,22 @@ export const projectTranslationsES: Record<string, ProjectTranslationES> = {
   },
 
   "mostro-website": {
+    type: "DISEÑO WEB · WORDPRESS + DIVI",
+    title: "Mostro Cine Coop: diseño del sitio y desarrollo en WordPress",
+    role: "Diseñador web y desarrollador WordPress, en Bits Kingdom",
+    tools: "Figma, WordPress, Divi Builder, CSS a medida",
+    note: "Este sitio fue reconstruido con otra tecnología después de mi salida de Bits Kingdom en 2025. Las pantallas de abajo muestran la versión en WordPress + Divi que diseñé y construí.",
     description:
-      "Creación del sitio web de Mostro, un colectivo audiovisual alternativo de Montevideo, Uruguay.",
+      "Diseñado en Figma y construido en WordPress con Divi para una cooperativa audiovisual de Montevideo.",
     subtitle:
       "Sitio web audaz para un colectivo audiovisual alternativo de Montevideo, Uruguay",
     challenge:
       "Mostro Cine Coop, un colectivo audiovisual alternativo de Montevideo, Uruguay, tenía una identidad visual fuerte pero ningún sitio web que pudiera estar a su altura. Su presencia en línea era inconsistente, lo que dificultaba mostrar su trabajo creativo, atraer colaboradores y comunicar su espíritu independiente a nuevas audiencias.\n\nEl reto era diseñar y construir un sitio web audaz y auténtico que capturara el carácter irreverente del colectivo — sin sacrificar la usabilidad ni la claridad para los visitantes que descubren su trabajo por primera vez.",
     approach:
-      "Lideré el proyecto desde la investigación visual hasta la implementación. Tras sumergirme en la estética del colectivo — su obra cinematográfica, referencias visuales y la escena del cine alternativo — definí una dirección de diseño que equilibraba la expresión artística con la claridad funcional.\n\nDiseñé el sitio completo en Figma, validé la arquitectura de información con un sitemap detallado y wireframes, y construí el producto final en WordPress con Divi Builder. El foco a lo largo de todo el proceso fue el alto contraste, la tipografía expresiva y el impacto visual — manteniendo una navegación intuitiva.",
+      "Diseñé el sitio completo en Figma y lo construí yo mismo en WordPress con Divi Builder, como parte del equipo de Bits Kingdom. Llevé el proyecto del primer moodboard al lanzamiento: investigación visual, mapa del sitio, wireframes, diseño en alta fidelidad, desarrollo e integración de contenido con el colectivo.",
     metrics: [
-      { value: "3 meses", label: "duración del proyecto" },
-      { value: "mostro.uy", label: "sitio en vivo" },
-      { value: "↑ solicitudes de contacto", label: "tras el lanzamiento" },
-      { value: "Figma + WordPress + Divi", label: "herramientas utilizadas" },
+      { value: "13", label: "plantillas construidas" },
+      { value: "5", label: "proyectos publicados por el cliente" },
     ],
     steps: [
       {
@@ -166,10 +177,16 @@ export const projectTranslationsES: Record<string, ProjectTranslationES> = {
       },
       {
         num: "04",
-        title: "Implementación",
-        body: "Construí el sitio en WordPress con Divi Builder, traduciendo los diseños de Figma con alta fidelidad. Colaboré estrechamente con el colectivo durante la integración de contenido, hice los refinamientos finales a partir de su feedback y lancé en mostro.uy.",
+        title: "Desarrollo",
+        body: "Construí cada plantilla en Divi Builder siguiendo los diseños de Figma sección por sección. Los proyectos tienen su propio tipo de contenido, así el colectivo publica trabajo nuevo sin tocar el diseño. CSS a medida donde los módulos de Divi no alcanzaban. Integré el contenido con el colectivo, ajusté con su retroalimentación y lanzamos en mostro.uy.",
         imageLabel: "",
       },
     ],
   },
 };
+
+/** Applies the Spanish copy for a project; untranslated fields keep English. */
+export function translateES(project: Project): Project {
+  const tr = projectTranslationsES[project.slug];
+  return tr ? { ...project, ...tr } : project;
+}

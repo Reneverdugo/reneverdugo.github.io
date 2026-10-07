@@ -5,9 +5,10 @@ import Layout from "../../layouts/Layout.astro";
 import { getProjects } from "../../lib/notion";
 import { posts } from "../../data/posts";
 import { ui } from "../../i18n/ui";
+import { translateES } from "../../data/projectTranslationsES";
 
 const t = ui.es;
-const projects = await getProjects();
+const projects = (await getProjects()).map(translateES);
 
 function thumbImg(slug: string): string | null {
   const rel = `/images/projects/${slug}/thumbnail.png`;
@@ -17,7 +18,7 @@ function thumbImg(slug: string): string | null {
 
 <Layout
   title="Inicio"
-  description="René Verdugo — Diseñador UX/UI creando productos digitales que combinan claridad y deleite."
+  description="René Verdugo, diseñador web y desarrollador WordPress. Diseño en Figma y desarrollo en WordPress con Divi o temas a medida."
   lang="es"
 >
   <!-- ── Hero ── -->
@@ -60,18 +61,8 @@ function thumbImg(slug: string): string | null {
           <!-- Stats -->
           <div class="flex items-center gap-12 md:gap-16">
             <div>
-              <p class="text-[26px] font-bold" style="color: var(--fg);">20+</p>
-              <p class="text-[13px]" style="color: var(--fg-3);">{t.home.statProjects}</p>
-            </div>
-            <div class="w-px h-8" style="background-color: var(--bd);"></div>
-            <div>
               <p class="text-[26px] font-bold" style="color: var(--fg);">8+</p>
               <p class="text-[13px]" style="color: var(--fg-3);">{t.home.statYears}</p>
-            </div>
-            <div class="w-px h-8" style="background-color: var(--bd);"></div>
-            <div>
-              <p class="text-[26px] font-bold" style="color: var(--fg);">12</p>
-              <p class="text-[13px]" style="color: var(--fg-3);">{t.home.statClients}</p>
             </div>
           </div>
         </div>

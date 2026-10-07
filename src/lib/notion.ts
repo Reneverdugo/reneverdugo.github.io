@@ -1,6 +1,7 @@
 import { Client } from "@notionhq/client";
 import type { Project, ProjectStep } from "../data/projects";
 import { projects as staticProjects } from "../data/projects";
+import { applyOverride } from "../data/projectOverrides";
 
 const NOTION_TOKEN = import.meta.env.NOTION_TOKEN;
 // "My projects" data source inside Design Portfolio
@@ -124,7 +125,7 @@ function pageToProject(page: any, content?: ParsedContent | null): Project {
   const slug = slugify(textProp(p.Slug) || titleProp(p.Name));
   const fallback = staticProjects.find((s) => s.slug === slug);
 
-  return {
+  return applyOverride({
     title:       titleProp(p.Name),
     type:        firstTag(p.Tags) || fallback?.type || "PROJECT",
     description: textProp(p.Description) || fallback?.description || "",
@@ -142,7 +143,7 @@ function pageToProject(page: any, content?: ParsedContent | null): Project {
     link:        urlProp(p.Link) || fallback?.link,
     demo:        urlProp(p.Demo) || fallback?.demo,
     nextProject: fallback?.nextProject,
-  };
+  });
 }
 
 // ── Public API ────────────────────────────────────────────────────────────────
@@ -150,7 +151,7 @@ function pageToProject(page: any, content?: ParsedContent | null): Project {
 export async function getProjects(): Promise<Project[]> {
   if (!isConfigured() || !notion) {
     console.log("[Notion] Token not set — using static data.");
-    return staticProjects;
+    return staticProjects.map(applyOverride);
   }
 
   try {
@@ -162,13 +163,13 @@ export async function getProjects(): Promise<Project[]> {
 
     if (response.results.length === 0) {
       console.warn("[Notion] 0 published projects — falling back to static data.");
-      return staticProjects;
+      return staticProjects.map(applyOverride);
     }
 
     return response.results.map((page: any) => pageToProject(page));
   } catch (err) {
     console.warn("[Notion] Query failed — falling back to static data.", err);
-    return staticProjects;
+    return staticProjects.map(applyOverride);
   }
 }
 
@@ -176,7 +177,7 @@ export async function getProjects(): Promise<Project[]> {
 export async function getProjectsWithContent(): Promise<Project[]> {
   if (!isConfigured() || !notion) {
     console.log("[Notion] Token not set — using static data.");
-    return staticProjects;
+    return staticProjects.map(applyOverride);
   }
 
   try {
@@ -188,7 +189,7 @@ export async function getProjectsWithContent(): Promise<Project[]> {
 
     if (response.results.length === 0) {
       console.warn("[Notion] 0 published projects — falling back to static data.");
-      return staticProjects;
+      return staticProjects.map(applyOverride);
     }
 
     const projects = await Promise.all(
@@ -201,7 +202,7 @@ export async function getProjectsWithContent(): Promise<Project[]> {
     return projects;
   } catch (err) {
     console.warn("[Notion] Query failed — falling back to static data.", err);
-    return staticProjects;
+    return staticProjects.map(applyOverride);
   }
 }
 

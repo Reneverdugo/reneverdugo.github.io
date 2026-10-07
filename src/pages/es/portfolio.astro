@@ -4,9 +4,10 @@ import { join } from "path";
 import Layout from "../../layouts/Layout.astro";
 import { getProjects } from "../../lib/notion";
 import { ui } from "../../i18n/ui";
+import { translateES } from "../../data/projectTranslationsES";
 
 const t = ui.es;
-const projects = await getProjects();
+const projects = (await getProjects()).map(translateES);
 
 function thumbImg(slug: string): string | null {
   const rel = `/images/projects/${slug}/thumbnail.png`;

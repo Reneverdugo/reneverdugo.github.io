@@ -16,6 +16,8 @@ export interface Project {
   duration: string;
   tools: string;
   subtitle: string;
+  /** Optional notice rendered under the case header (e.g. stack migration). */
+  note?: string;
   challenge: string;
   approach: string;
   metrics: { value: string; label: string }[];
