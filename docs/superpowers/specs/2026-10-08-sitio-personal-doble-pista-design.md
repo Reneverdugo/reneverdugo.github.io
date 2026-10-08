@@ -278,13 +278,19 @@ Hay que sumar las etiquetas a las dos entradas `nav` de `src/i18n/ui.ts`.
 ## 6. Paquete de limpieza del CV
 
 Tres datos publicados o a punto de publicarse que violan la regla de René ("dato sin
-confirmar no se publica"):
+confirmar no se publica"). Los dos primeros ya se ejecutaron el 8 de octubre.
 
-| Qué | Dónde | Acción |
-| --- | --- | --- |
-| `awards`: "Awwwards — BitForex", "Behance Featured — Kohi App", "CSS Design Awards — Studio Interior Amsterdam" | `cv.astro` | **Borrar.** Son los proyectos demo de la plantilla, los mismos fallbacks de `projects.ts`. Son premios inventados. Hoy están salvados porque la sección Recognition está comentada; si alguien la descomenta, se publican. |
-| "8+ projects", "12 repeat clients", "3 engineering teams" en la entrada Freelance | `cv.astro` | Mismo tipo de dato que los stats que se quitaron del hero por no verificables. Quedaron. Quitar, o reemplazar por números reales que René confirme. |
-| `8+ years in digital design` en el resumen | `cv.astro` + ES | Las fechas del propio CV dan 10 años de digital (Emcor 2016) y 14 de carrera (Click, abril 2012). El 8+ subvende. Decidir: quitar la cifra o corregirla. |
+| Qué | Dónde | Acción | Estado |
+| --- | --- | --- | --- |
+| `awards`: "Awwwards — BitForex", "Behance Featured — Kohi App", "CSS Design Awards — Studio Interior Amsterdam" | `cv.astro` | **Borrado**, junto con el bloque Recognition comentado que los renderizaba. Eran los proyectos demo de la plantilla — los mismos fallbacks de `projects.ts` — con premios inventados. El array solo existía en el CV inglés; el español nunca lo tuvo. | ✅ hecho |
+| "8+ projects", "12 repeat clients", "3 engineering teams" en la entrada Freelance | `cv.astro` + ES | **Borrados.** La entrada queda con dos bullets sin cifras: el end-to-end de proyectos de clientes, y productos propios. También se cayeron los sectores "fintech / SaaS", que no eran verificables. | ✅ hecho |
+| `8+ years in digital design` en el resumen | `cv.astro` + ES + `ui.ts` | Las fechas del propio CV dan 10 años de digital (Emcor 2016) y 14 de carrera (Click, abril 2012). El 8+ subvende. Decidir: quitar la cifra o corregirla. | ⬜ pendiente |
+
+**Queda un asterisco en los dos bullets que sobrevivieron:** son claims de René que Claude
+no puede verificar contra nada del repo — se les quitaron los números inventados, pero la
+afirmación de fondo ("lideré diseño end-to-end para clientes como freelance") es suya y
+conviene que la relea. Y el título de la entrada sigue siendo "Lead UX/UI Designer" para
+trabajo freelance, que es una combinación rara; no se tocó porque no se pidió.
 
 Y un hueco de contenido: `eyelecture-app` tiene `subtitle: ""` en
 `projectTranslationsES.ts`, a diferencia de los otros tres; se nota en la página del caso.
