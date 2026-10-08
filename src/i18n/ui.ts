@@ -14,8 +14,9 @@ export const ui = {
     home: {
       eyebrow: "Welcome",
       h1: "Hi, I'm René.",
-      role: "Web Designer & WordPress Developer",
-      bio: "I design websites in Figma and build them myself in WordPress, with Divi or with custom themes coded by hand. Graphic design background, 8+ years in digital design, 4+ of them shipping client sites at a WordPress agency. Currently open to new roles and freelance projects.",
+      role: "Designer and developer. Digital products, websites, graphic design.",
+      bio: "I spent five years at Bits Kingdom, an agency specialized in WordPress and digital products, designing and building.",
+      bioNow: "Currently: experimenting, building products on my own, open to new opportunities.",
       ctaPrimary: "View my work",
       ctaSecondary: "Read the blog",
       workEyebrow: "Selected Work",
@@ -108,8 +109,9 @@ export const ui = {
     home: {
       eyebrow: "Bienvenido",
       h1: "Hola, soy René.",
-      role: "Diseñador web y desarrollador WordPress",
-      bio: "Diseño sitios web en Figma y los construyo yo mismo en WordPress, con Divi o con temas a medida escritos a mano. Vengo del diseño gráfico: 8+ años en diseño digital, más de 4 publicando sitios para clientes en una agencia especializada en WordPress. Abierto a nuevos puestos y proyectos freelance.",
+      role: "Diseñador y desarrollador. Productos digitales, sitios web, diseño gráfico.",
+      bio: "Estuve cinco años en Bits Kingdom, una agencia especializada en WordPress y productos digitales, diseñando y construyendo.",
+      bioNow: "Actualmente: experimentando, construyendo productos por mi cuenta, abierto a nuevas oportunidades.",
       ctaPrimary: "Ver mi trabajo",
       ctaSecondary: "Leer el blog",
       workEyebrow: "Trabajo Selecto",

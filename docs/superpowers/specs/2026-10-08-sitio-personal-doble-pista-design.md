@@ -46,14 +46,17 @@ para servirles.
 
 ## Alcance
 
-| # | Entregable | Superficie |
-| --- | --- | --- |
-| 1 | Bio nuevo de tres tiempos | home EN + ES |
-| 2 | Página About con el arco completo | `/about` + `/es/about` (nuevas) |
-| 3 | Portafolio en dos bloques, producto primero | `/portfolio` + `/es/portfolio` |
-| 4 | Archivo "More work" con Behance | al final de `/portfolio` |
-| 5 | Nav con About | `Nav.astro` |
-| 6 | Limpieza del CV | `/cv` + `/es/cv` |
+| # | Entregable | Superficie | Estado |
+| --- | --- | --- | --- |
+| 1 | Bio nuevo de tres tiempos + metas | home EN + ES | ✅ en vivo 8 oct |
+| 2 | Página About con el arco completo | `/about` + `/es/about` (nuevas) | ⬜ |
+| 3 | Portafolio en dos bloques, producto primero | `/portfolio` + `/es/portfolio` | ⬜ |
+| 4 | Archivo "More work" con Behance | al final de `/portfolio` | ⬜ bloqueado: faltan las imágenes |
+| 5 | Nav con About | `Nav.astro` | ⬜ |
+| 6 | Limpieza del CV | `/cv` + `/es/cv` | ✅ premios y stats; cifra de años pendiente |
+
+El enlace **"más sobre mí →"** del bio no se puso todavía: apuntaría a una página que no
+existe. Entra con el entregable 2.
 
 ## 1. Bio de la home
 
