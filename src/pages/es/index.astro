@@ -6,8 +6,10 @@ import { getProjects } from "../../lib/notion";
 import { posts } from "../../data/posts";
 import { ui } from "../../i18n/ui";
 import { translateES } from "../../data/projectTranslationsES";
+import { about } from "../../data/about";
 
 const t = ui.es;
+const a = about.es;
 const projects = (await getProjects()).map(translateES);
 
 function thumbImg(slug: string): string | null {
@@ -118,6 +120,32 @@ function thumbImg(slug: string): string | null {
       <a href="/es/portfolio" class="mt-8 inline-block text-[14px] sm:hidden" style="color: var(--accent);">
         {t.home.workViewAll}
       </a>
+    </div>
+  </section>
+
+  <div style="height: 1px; background-color: var(--bd);"></div>
+
+  <!-- ── About ── -->
+  <section class="py-20 md:py-24">
+    <div class="max-w-[1200px] mx-auto px-6 xl:px-0">
+      <p class="text-[11px] font-bold tracking-[2px] uppercase mb-3" style="color: var(--accent);">
+        {a.eyebrow}
+      </p>
+      <h2
+        class="text-[36px] md:text-[44px] font-bold leading-[1.15] mb-8"
+        style="color: var(--fg); max-width: 680px;"
+      >
+        {a.heading}
+      </h2>
+      <div class="flex flex-col gap-5" style="max-width: 680px;">
+        {
+          a.paragraphs.map((text) => (
+            <p class="text-[16px] md:text-[17px] leading-[1.7]" style="color: var(--fg-2);">
+              {text}
+            </p>
+          ))
+        }
+      </div>
     </div>
   </section>
 
